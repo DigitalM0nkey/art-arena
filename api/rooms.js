@@ -10,6 +10,7 @@ router.get('/', (req, res, next) => {
         rooms.push(room.data());
         rooms[rooms.length - 1].id = room.id;
       });
+      console.log(rooms);
       res.json(rooms);
     });
 });
