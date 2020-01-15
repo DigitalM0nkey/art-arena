@@ -63,18 +63,18 @@
               </div>
               <select class="custom-select mr-sm-2 modal-dd" id="timeLimit">
                 <option selected>Time Limit</option>
-                <option value="1">5 Minutes</option>
-                <option value="2">12 Hours</option>
-                <option value="3">24 Hours</option>
-                <option value="4">3 Days</option>
+                <option value="5">5 Minutes</option>
+                <option value="720">12 Hours</option>
+                <option value="1440">24 Hours</option>
+                <option value="4320">3 Days</option>
               </select>
       
               <select class="custom-select mr-sm-2 modal-dd" id="maxPlayers">
                 <option selected>Max Players</option>
-                <option value="1">2</option>
-                <option value="2">5</option>
-                <option value="3">7</option>
-                <option value="4">10</option>
+                <option value="2">2</option>
+                <option value="5">5</option>
+                <option value="7">7</option>
+                <option value="10">10</option>
               </select>
                   
               <div class="col-auto my-1">
@@ -111,7 +111,7 @@
                 </div>
               </div>
               <div class="col-auto my-1">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" onclick="createRoom()">Submit</button>
               </div>
             </form>
           </div>

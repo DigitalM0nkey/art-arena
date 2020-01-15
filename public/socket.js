@@ -158,6 +158,21 @@ function joinRoom(roomId) {
     });
 }
 
+const createRoom = () => {
+  $.post(
+    "api/rooms",
+    {
+      uid: firebase.auth().currentUser.uid,
+      timeLimit: $("#timeLimit").val(),
+      maxPlayers: $("#maxPlayers").val()
+      // tools:
+    },
+    function(data) {
+      console.log("DATA", data);
+    }
+  );
+};
+
 // on load of page
 $(function() {
   // when the client clicks SEND
