@@ -40,21 +40,12 @@
       <h3><b>My Arenas</b></h3>
     </button>
 
-<!-- Default dropright button -->
-<!-- <div class="btn-group dropright">
-    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Dropright
-    </button>
-    <div class="dropdown-menu"> -->
-      <!-- Dropdown menu links -->
-    <!-- </div>
-  </div> -->
     <!-- Modal -->
     <div class="modal fade" id="create-room" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="create-room" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Arena</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">Create Arena</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -62,73 +53,67 @@
           <div class="modal-body">
             Create an public arena to play against strangers or create a private arena and battle with your friends.
           </div>
-          <div class="modal-footer" id="createRoomButtons">
-                <form>
-
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1">Arena Name</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="A Happy Little Arena" aria-label="arenaName" aria-describedby="basic-addon1">
-                      </div>
-
-                      <!-- <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Arena Name</span>
-                          </div>
-                          <input type="text" class="form-control" placeholder="Something" aria-label="arenaName" aria-describedby="basic-addon1">
-                        </div> -->
-
-                    <div class="form-row align-items-center">
-                      <div class="col-auto my-1">
-                        <label class="mr-sm-2" for="inlineFormCustomSelect">Time Limit</label>
-                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                          <option selected>Choose...</option>
-                          <option value="1">5 Minutes</option>
-                          <option value="2">12 Hours</option>
-                          <option value="3">24 Hours</option>
-                          <option value="4">3 Days</option>
-                        </select>
-                      </div>
-                      <div class="col-auto my-1">
-                        <div class="custom-control custom-checkbox mr-sm-2">
-                          <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                          <label class="custom-control-label" for="customControlAutosizing">Private</label>
-                        </div>
-                      </div>
-                      <div class="col-auto my-1" id="toolbox">
-                          <label class="mr-sm-2" for="checkLine">Toolbox</label>
-                      <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="checkLine">
-                          <label class="custom-control-label" for="checkLine">Line</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="checkWeirdLine">
-                            <label class="custom-control-label" for="checkWeirdLine">WeirdLine</label>
-                          </div>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="checkErase">
-                            <label class="custom-control-label" for="checkErase">Erase</label>
-                          </div>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="checkSpray">
-                            <label class="custom-control-label" for="checkSpray">Spray</label>
-                          </div>  
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="checkCircle">
-                            <label class="custom-control-label" for="checkCircle">Circle</label>
-                          </div>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="checkFlood">
-                            <label class="custom-control-label" for="checkFlood">Flood Fill</label>
-                          </div>
-                      </div>
-                      <div class="col-auto my-1">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                      </div>
-                    </div>
-                  </form>
-            <button type="button" id="Lobby" class="btn btn-secondary" data-dismiss="modal">Lobby</button>
+          <div class="modal-body" id="createRoomButtons">
+            <form>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Arena Name</span>
+                </div>
+                <input type="text" class="form-control" placeholder="A Happy Little Arena" aria-label="arenaName" aria-describedby="basic-addon1">
+              </div>
+              <select class="custom-select mr-sm-2 modal-dd" id="timeLimit">
+                <option selected>Time Limit</option>
+                <option value="1">5 Minutes</option>
+                <option value="2">12 Hours</option>
+                <option value="3">24 Hours</option>
+                <option value="4">3 Days</option>
+              </select>
+      
+              <select class="custom-select mr-sm-2 modal-dd" id="maxPlayers">
+                <option selected>Max Players</option>
+                <option value="1">2</option>
+                <option value="2">5</option>
+                <option value="3">7</option>
+                <option value="4">10</option>
+              </select>
+                  
+              <div class="col-auto my-1">
+                <div class="custom-control custom-checkbox mr-sm-2">
+                  <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                  <label class="custom-control-label" for="customControlAutosizing">Private Arena</label>
+                </div>
+              </div>
+              <div class="col-auto my-1" id="toolbox">
+                <label class="mr-sm-2" for="checkLine">Toolbox</label>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="checkLine">
+                  <label class="custom-control-label" for="checkLine">Line</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="checkWeirdLine">
+                  <label class="custom-control-label" for="checkWeirdLine">WeirdLine</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="checkErase">
+                  <label class="custom-control-label" for="checkErase">Erase</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="checkSpray">
+                  <label class="custom-control-label" for="checkSpray">Spray</label>
+                </div>  
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="checkCircle">
+                  <label class="custom-control-label" for="checkCircle">Circle</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="checkFlood">
+                  <label class="custom-control-label" for="checkFlood">Flood Fill</label>
+                </div>
+              </div>
+              <div class="col-auto my-1">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

@@ -315,6 +315,14 @@ span {
   margin: $margin;
 }
 
+#toolbox {
+  text-align: left;
+}
+
+.modal-dd {
+  margin-bottom: $margin;
+}
+
 .toolbar {
   width: 62vw;
   display: inline;
