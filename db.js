@@ -10,7 +10,4 @@ admin.initializeApp({
   })
 });
 
-const Firestore = admin.firestore.Firestore;
-const db = new Firestore();
-
-module.exports = db;
+module.exports = admin.firestore();

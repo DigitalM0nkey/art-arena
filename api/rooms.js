@@ -38,8 +38,8 @@ router.post('/', ({body}, res, next) => {
           completion: new Date()
         }
       ],
-      limit: body.limit,
-      tools: body.tools,
+      timeLimit: body.timeLimit,
+      //tools: body.tools,
       maxPlayers: body.maxPlayers,
       state: "waiting",
       startDate: Date.now()
@@ -55,3 +55,7 @@ router.post('/', ({body}, res, next) => {
 })
 
 module.exports = router;
+
+{
+
+}
