@@ -38,6 +38,7 @@ router.post('/', ({body}, res, next) => {
           completion: new Date()
         }
       ],
+      roomName: body.roomName,
       timeLimit: body.timeLimit,
       //tools: body.tools,
       maxPlayers: body.maxPlayers,

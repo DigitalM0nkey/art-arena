@@ -1,148 +1,145 @@
+<br>
 
-
-
-  <br>
-
-  <div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Reset</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            Are you sure you want to reset the canvas?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="reset()" data-dismiss="modal">Reset</button>
-          </div>
-        </div>
+<div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reset</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to reset the canvas?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="reset()" data-dismiss="modal">Reset</button>
       </div>
     </div>
+  </div>
+</div>
 
 
 <!-- Start of the rooms section -->
 <div class="roomsHeading">
-    <div id='currentRoom'></div>
+  <div id='currentRoom'></div>
   <!-- Button trigger modal -->
- 
-    
+
+
   <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#create-room">
     <h3><b>Create Arena</b></h3>
   </button>
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#select-room">
-      <h3><b>Select Arena</b></h3>
-    </button>
+    <h3><b>Select Arena</b></h3>
+  </button>
   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#my-rooms">
-      <h3><b>My Arenas</b></h3>
-    </button>
+    <h3><b>My Arenas</b></h3>
+  </button>
 
-    <!-- Modal -->
-    <div class="modal fade" id="create-room" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="create-room" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Create Arena</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            Create an public arena to play against strangers or create a private arena and battle with your friends.
-          </div>
-          <div class="modal-body" id="createRoomButtons">
-            <form>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Arena Name</span>
-                </div>
-                <input type="text" class="form-control" placeholder="A Happy Little Arena" aria-label="arenaName" aria-describedby="basic-addon1">
+  <!-- Modal -->
+  <div class="modal fade" id="create-room" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="create-room" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Create Arena</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Create an public arena to play against strangers or create a private arena and battle with your friends.
+        </div>
+        <div class="modal-body" id="createRoomButtons">
+          <form>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Arena Name</span>
               </div>
-              <select class="custom-select mr-sm-2 modal-dd" id="timeLimit">
-                <option selected>Time Limit</option>
-                <option value="5">5 Minutes</option>
-                <option value="720">12 Hours</option>
-                <option value="1440">24 Hours</option>
-                <option value="4320">3 Days</option>
-              </select>
-      
-              <select class="custom-select mr-sm-2 modal-dd" id="maxPlayers">
-                <option selected>Max Players</option>
-                <option value="2">2</option>
-                <option value="5">5</option>
-                <option value="7">7</option>
-                <option value="10">10</option>
-              </select>
-                  
-              <div class="col-auto my-1">
-                <div class="custom-control custom-checkbox mr-sm-2">
-                  <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                  <label class="custom-control-label" for="customControlAutosizing">Private Arena</label>
-                </div>
+              <input type="text" class="form-control" placeholder="A Happy Little Arena" aria-label="arenaName" aria-describedby="basic-addon1" id="roomName">
+            </div>
+            <select class="custom-select mr-sm-2 modal-dd" id="timeLimit">
+              <option selected>Time Limit</option>
+              <option value="5">5 Minutes</option>
+              <option value="720">12 Hours</option>
+              <option value="1440">24 Hours</option>
+              <option value="4320">3 Days</option>
+            </select>
+
+            <select class="custom-select mr-sm-2 modal-dd" id="maxPlayers">
+              <option selected>Max Players</option>
+              <option value="2">2</option>
+              <option value="5">5</option>
+              <option value="7">7</option>
+              <option value="10">10</option>
+            </select>
+
+            <div class="col-auto my-1">
+              <div class="custom-control custom-checkbox mr-sm-2">
+                <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                <label class="custom-control-label" for="customControlAutosizing">Private Arena</label>
               </div>
-              <div class="col-auto my-1" id="toolbox">
-                <label class="mr-sm-2" for="checkLine">Toolbox</label>
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="checkLine">
-                  <label class="custom-control-label" for="checkLine">Line</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="checkWeirdLine">
-                  <label class="custom-control-label" for="checkWeirdLine">WeirdLine</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="checkErase">
-                  <label class="custom-control-label" for="checkErase">Erase</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="checkSpray">
-                  <label class="custom-control-label" for="checkSpray">Spray</label>
-                </div>  
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="checkCircle">
-                  <label class="custom-control-label" for="checkCircle">Circle</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="checkFlood">
-                  <label class="custom-control-label" for="checkFlood">Flood Fill</label>
-                </div>
+            </div>
+            <div class="col-auto my-1" id="toolbox">
+              <label class="mr-sm-2" for="checkLine">Toolbox</label>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="checkLine">
+                <label class="custom-control-label" for="checkLine">Line</label>
               </div>
-              <div class="col-auto my-1">
-                <button type="submit" class="btn btn-primary" onclick="createRoom()">Submit</button>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="checkWeirdLine">
+                <label class="custom-control-label" for="checkWeirdLine">WeirdLine</label>
               </div>
-            </form>
-          </div>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="checkErase">
+                <label class="custom-control-label" for="checkErase">Erase</label>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="checkSpray">
+                <label class="custom-control-label" for="checkSpray">Spray</label>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="checkCircle">
+                <label class="custom-control-label" for="checkCircle">Circle</label>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="checkFlood">
+                <label class="custom-control-label" for="checkFlood">Flood Fill</label>
+              </div>
+            </div>
+            <div class="col-auto my-1">
+              <button type="submit" class="btn btn-primary" onclick="createRoom()">Submit</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="modal fade" id="select-room" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="create-room" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Arena</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              Pick a public arena to play in, or stay and chat in the lobby.
-            </div>
-            <div class="modal-footer" id="defaultRooms">
-              <button type="button" onclick="switchRoom('Arena #1')" class="btn btn-primary" data-dismiss="modal">Arena #1 : Cartoon Colosseum <span id="a1Spots" class="badge badge-light"> 4 spots left</span></button>
-              <button type="button" onclick="switchRoom('Arena #2')" class="btn btn-primary" data-dismiss="modal">Arena #2 : Snapshot Stadium <span id="a2Spots" class="badge badge-light"> 4 spots left</span></button>
-              <button type="button" onclick="switchRoom('Arena #3')" class="btn btn-primary" data-dismiss="modal">Arena #3 : Sketch Standoff <span id="a3Spots" class="badge badge-light"> 3 spots left</span></button>
-              <button type="button" onclick="switchRoom('Arena #4')" class="btn btn-primary" data-dismiss="modal">Arena #4 : Doodle Duel <span id="a4Spots" class="badge badge-light"> 2 spots left</span></button>
-             <button type="button" id="Lobby" class="btn btn-secondary" data-dismiss="modal">Lobby</button>
-            </div>
-          </div>
+  <div class="modal fade" id="select-room" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="create-room" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Arena</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Pick a public arena to play in, or stay and chat in the lobby.
+        </div>
+        <div class="modal-footer" id="defaultRooms">
+          <button type="button" onclick="switchRoom('Arena #1')" class="btn btn-primary" data-dismiss="modal">Arena #1 : Cartoon Colosseum <span id="a1Spots" class="badge badge-light"> 4 spots left</span></button>
+          <button type="button" onclick="switchRoom('Arena #2')" class="btn btn-primary" data-dismiss="modal">Arena #2 : Snapshot Stadium <span id="a2Spots" class="badge badge-light"> 4 spots left</span></button>
+          <button type="button" onclick="switchRoom('Arena #3')" class="btn btn-primary" data-dismiss="modal">Arena #3 : Sketch Standoff <span id="a3Spots" class="badge badge-light"> 3 spots left</span></button>
+          <button type="button" onclick="switchRoom('Arena #4')" class="btn btn-primary" data-dismiss="modal">Arena #4 : Doodle Duel <span id="a4Spots" class="badge badge-light"> 2 spots left</span></button>
+          <button type="button" id="Lobby" class="btn btn-secondary" data-dismiss="modal">Lobby</button>
         </div>
       </div>
+    </div>
+  </div>
 
-    <div class="modal fade" id="my-rooms" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="my-room-label" aria-hidden="true">
+  <div class="modal fade" id="my-rooms" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="my-room-label" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -162,120 +159,123 @@
   </div>
 
   <div id="rooms"></div>
-</div> 
+</div>
 <!-- End of the rooms section -->
 
 <br>
-  <div id="paint-app">
-    <div class="imgRef">
+<div id="paint-app">
+  <div class="imgRef">
 
-        <img class="placeholder-image"
-          id="mainImage"
-          src="https://media.giphy.com/media/MEF1VadKbQBdmd8LCn/giphy.gif"
-          alt="Random"
-        >
-        </img>
-        
-    </div> 
-    <div class="waitingText">
-        <h2 class="waiting"><div class="spinner-border text-warning" role="status"></div> Waiting for friends to join... </h2>
-    </div>
-    <div class="playingText"><h2 class="playing">Go Ahead! Draw a happy little picture.</h2></div>
-    
-    <div class="votingText"><h2 class="voting">Once everyone finishes drawing, it'll be time to vote. Feel free to chat in the mean time. </h2>
-    </div>
+    <img class="placeholder-image" id="mainImage" src="https://media.giphy.com/media/MEF1VadKbQBdmd8LCn/giphy.gif" alt="Random">
+    </img>
 
-    <div class="winningText"><h2 class="winner">WE HAVE A WINNER!!</h2>
-      <button class="btn-primary btn" id="return">Return to the Lobby</button>
-    </div>
- 
-    <!-- // Error message for small screen // -->
-    <div id="smallScreen" class="alert alert-danger" role="alert">Make your screen size a little larger to draw
-      </div>
+  </div>
+  <div class="waitingText">
+    <h2 class="waiting">
+      <div class="spinner-border text-warning" role="status"></div> Waiting for friends to join...
+    </h2>
+  </div>
+  <div class="playingText">
+    <h2 class="playing">Go Ahead! Draw a happy little picture.</h2>
+  </div>
+
+  <div class="votingText">
+    <h2 class="voting">Once everyone finishes drawing, it'll be time to vote. Feel free to chat in the mean time. </h2>
+  </div>
+
+  <div class="winningText">
+    <h2 class="winner">WE HAVE A WINNER!!</h2>
+    <button class="btn-primary btn" id="return">Return to the Lobby</button>
+  </div>
+
+  <!-- // Error message for small screen // -->
+  <div id="smallScreen" class="alert alert-danger" role="alert">Make your screen size a little larger to draw
+  </div>
 
   <div class="paintings" id="paintings">
 
-      <div class="card">
-        <img id="spot1" src="" />
-        <div class="card-body">
-          <h5 class="card-title">Vote 4 Me!</h5>
-          <input class="btn btn-primary vote" type="button" id="vote1" value="Vote" />
-        </div>
+    <div class="card">
+      <img id="spot1" src="" />
+      <div class="card-body">
+        <h5 class="card-title">Vote 4 Me!</h5>
+        <input class="btn btn-primary vote" type="button" id="vote1" value="Vote" />
       </div>
-  
-      <div class="card">
-          <img id="spot2" src="" />
-        <div class="card-body">
-          <h5 class="card-title">Vote 4 Me!</h5>
-          <input class="btn btn-primary vote" type="button" id="vote2" value="Vote" />
-        </div>
+    </div>
+
+    <div class="card">
+      <img id="spot2" src="" />
+      <div class="card-body">
+        <h5 class="card-title">Vote 4 Me!</h5>
+        <input class="btn btn-primary vote" type="button" id="vote2" value="Vote" />
       </div>
-  
-      <div class="card">
-          <img id="spot3" src="" />
-        <div class="card-body">
-          <h5 class="card-title">Vote 4 Me!</h5>
-          <input class="btn btn-primary vote" type="button" id="vote3" value="Vote" />
-        </div>
+    </div>
+
+    <div class="card">
+      <img id="spot3" src="" />
+      <div class="card-body">
+        <h5 class="card-title">Vote 4 Me!</h5>
+        <input class="btn btn-primary vote" type="button" id="vote3" value="Vote" />
       </div>
-  
-      <div class="card">
-          <img id="spot4" src="" />
-        <div class="card-body">
-          <h5 class="card-title">Vote 4 Me!</h5>
-          <input class="btn btn-primary vote" type="button" id="vote4" value="Vote" />
-        </div>
+    </div>
+
+    <div class="card">
+      <img id="spot4" src="" />
+      <div class="card-body">
+        <h5 class="card-title">Vote 4 Me!</h5>
+        <input class="btn btn-primary vote" type="button" id="vote4" value="Vote" />
       </div>
-        
-  
+    </div>
+
+
   </div>
 
 
-  <div id="canvasDiv"></div> 
+  <div id="canvasDiv"></div>
 
   <div class="drawingURL">
-      <div class="card" style="width: 100%;">
-          <img id="myDrawing" src="..." class="card-img-top" alt="My Beautiful Drawing">
-          <div class="card-body">
-            <h2 class="card-title">Your Drawing</h2>
-            <p class="card-text myDrawingText">Wow!!! That's beautiful. So good in fact, we saved it to a permanent location here:</p><pre id="copyThis" class="card-text myDrawingURL"></pre>
-            <button data-clipboard-text="#copyThis" id="copy" class="btn btn-primary">Copy link to clipboard</button>
-          </div>
-        </div>
+    <div class="card" style="width: 100%;">
+      <img id="myDrawing" src="..." class="card-img-top" alt="My Beautiful Drawing">
+      <div class="card-body">
+        <h2 class="card-title">Your Drawing</h2>
+        <p class="card-text myDrawingText">Wow!!! That's beautiful. So good in fact, we saved it to a permanent location here:</p>
+        <pre id="copyThis" class="card-text myDrawingURL"></pre>
+        <button data-clipboard-text="#copyThis" id="copy" class="btn btn-primary">Copy link to clipboard</button>
+      </div>
+    </div>
   </div>
   <div class="submitButton">
-   <input type="button" class="btn btn-primary" id="drawing-complete" value="Submit" />
+    <input type="button" class="btn btn-primary" id="drawing-complete" value="Submit" />
   </div>
 
 </div>
 
 <br>
 <div class="chat">
-    <span id="conversation">
-      <input id="data" placeholder="Type your message here." />
-      <input type="button" class="btn btn-primary" id="datasend" value="Send a Message" />
-    </span> 
+  <span id="conversation">
+    <input id="data" placeholder="Type your message here." />
+    <input type="button" class="btn btn-primary" id="datasend" value="Send a Message" />
+  </span>
 </div>
 
 
 
 <script>
-    var clipboard = new ClipboardJS(".btn");
-    clipboard.on("success", function(e) {
-      console.log(e);
-    });
-    clipboard.on("error", function(e) {
-      console.log(e);
-    });
-  </script>
+  var clipboard = new ClipboardJS(".btn");
+  clipboard.on("success", function(e) {
+    console.log(e);
+  });
+  clipboard.on("error", function(e) {
+    console.log(e);
+  });
+</script>
 
 
-  <!-- // Personal Photos -->
+<!-- // Personal Photos -->
 
-  <!-- <script>
+<!-- <script>
     const uid = firebase.auth().currentUser.uid;
     console.log("UID =>", uid);
-    
+
     // Create a reference under which you want to list
 var listRef = storageRef.child(uid);
 console.log("LISTREF =>", listRef);
