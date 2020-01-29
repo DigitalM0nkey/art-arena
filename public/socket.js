@@ -159,14 +159,6 @@ function joinRoom(roomId) {
 }
 
 const createRoom = () => {
-  console.log("creating room");
-  let body = {
-    uid: firebase.auth().currentUser.uid,
-    timeLimit: $("#timeLimit").val(),
-    maxPlayers: $("#maxPlayers").val()
-    // tools:
-  };
-  console.log(body);
   $.post(
     "api/rooms",
     {
