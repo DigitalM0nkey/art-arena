@@ -2,16 +2,16 @@ const router = require('express').Router();
 const db = require('../db');
 
 router.get('/', (req, res, next) => {
-  db.collection("rooms")
+  db.collection("arenas")
     .get()
     .then(querySnapshot => {
-      let rooms = [];
-      querySnapshot.forEach(room => {
-        rooms.push(room.data());
-        rooms[rooms.length - 1].id = room.id;
+      let arenas = [];
+      querySnapshot.forEach(arena => {
+        arenas.push(arena.data());
+        arenas[arenas.length - 1].id = arena.id;
       });
-      console.log(rooms);
-      res.json(rooms);
+      console.log(arenas);
+      res.json(arenas);
     });
 });
 
@@ -33,7 +33,7 @@ router.post("/", ({body}, res, next) => {
   console.log('---');
   console.log(body);
   console.log('---');
-  db.collection("rooms")
+  db.collection("arenas")
     .add({
       players: [
         {
@@ -41,7 +41,7 @@ router.post("/", ({body}, res, next) => {
           completion: new Date()
         }
       ],
-      roomName: body.roomName,
+      arenaName: body.arenaName,
       timeLimit: body.timeLimit,
       //tools: body.tools,
       maxPlayers: body.maxPlayers,
@@ -54,7 +54,7 @@ router.post("/", ({body}, res, next) => {
     })
     .catch(error => {
       console.error("Error adding document: ", error);
-      res.status(500).send("Error saving room");
+      res.status(500).send("Error saving arena");
     });
 })
 

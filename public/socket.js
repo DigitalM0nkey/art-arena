@@ -163,7 +163,7 @@ const createRoom = () => {
     "api/rooms",
     {
       uid: firebase.auth().currentUser.uid,
-      arenaName: $("#roomName").val(),
+      roomName: $("#roomName").val(),
       timeLimit: $("#timeLimit").val(),
       maxPlayers: $("#maxPlayers").val()
       // tools:
