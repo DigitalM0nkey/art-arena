@@ -30,7 +30,9 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post("/", ({body}, res, next) => {
+  console.log('---');
   console.log(body);
+  console.log('---');
   db.collection("rooms")
     .add({
       players: [
