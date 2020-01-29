@@ -6,10 +6,13 @@ const db = require("./db");
 
 
 const app = express();
-app.use(bodyParser.json());
-app.use(express.static("public"));
 app.set("view engine", "ejs");
+app.use(bodyParser.json());   // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
 app.use("/api/rooms", require("./api/rooms"));
+app.use(express.static("public"));
 
 const server = http.createServer(app);
 const sockets = require("./sockets").init(server);
