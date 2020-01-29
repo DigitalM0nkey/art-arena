@@ -129,7 +129,7 @@ span {
   font-size: 1rem;
 }
 
-#rooms {
+#arenas {
   display: none;
   font-family: "Averia Sans Libre", cursive;
 }
@@ -189,7 +189,7 @@ span {
   display: none;
 }
 
-.roomsHeading {
+.arenasHeading {
   font-family: "Averia Sans Libre", cursive;
   text-align: center;
   display: -webkit-box;
@@ -220,7 +220,7 @@ span {
   border-radius: 1rem;
 }
 
-#rooms {
+#arenas {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

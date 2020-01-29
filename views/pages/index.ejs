@@ -38,21 +38,22 @@
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
             $.get(
-              "api/rooms",
-              function(rooms) {
-                const myRooms = rooms.filter(room =>
-                  room.players.find(player => player.id === user.uid)
+              "api/arenas",
+              function(arenas) {
+                console.log(arenas);
+                const myArenas = arenas.filter(arena =>
+                  arena.players.find(player => player.id === user.uid)
                 );
-                const availableRooms = rooms.filter(room =>
-                  room.state === 'waiting' && !room.players.find(player => player.id === user.uid)
+                const availableArenas = arenas.filter(arena =>
+                  arena.state === 'waiting' && !arena.players.find(player => player.id === user.uid)
                 );
-                myRooms.forEach(room => {
-                  $('#roomButtons').append(`<button type="button" id="room_${room.id}" class="btn btn-success" data-dismiss="modal" onclick="openRoom('${room.id}')">${room.name}</button>`)
+                myArenas.forEach(arena => {
+                  $('#arenaButtons').append(`<button type="button" id="arena_${arena.id}" class="btn btn-success" data-dismiss="modal" onclick="openArena('${arena.id}')">${arena.name}</button>`)
                 });
-                availableRooms.forEach(room => {
-                  $('#roomButtons').append(`<button type="button" id="room_${room.id}" class="btn btn-warning" data-dismiss="modal" onclick="joinRoom('${room.id}')">${room.name}</button>`)
+                availableArenas.forEach(arena => {
+                  $('#arenaButtons').append(`<button type="button" id="arena_${arena.id}" class="btn btn-warning" data-dismiss="modal" onclick="joinArena('${arena.id}')">${arena.name}</button>`)
                 });
-                console.log("MY-ROOMS =>", myRooms);
+                console.log("MY-ARENAS =>", myArenas);
               }
             );
 

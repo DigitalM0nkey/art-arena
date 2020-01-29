@@ -2,19 +2,19 @@
 
 <%- include ('../modals/reset.ejs') %>
 
-<!-- Start of the rooms section -->
-<div class="roomsHeading">
-  <div id='currentRoom'></div>
+<!-- Start of the arenas section -->
+<div class="arenasHeading">
+  <div id='currentArena'></div>
   <!-- Button trigger modal -->
 
 
-  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#create-room">
+  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#create-arena">
     <h3><b>Create Arena</b></h3>
   </button>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#select-room">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#select-arena">
     <h3><b>Select Arena</b></h3>
   </button>
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#my-rooms">
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#my-arenas">
     <h3><b>My Arenas</b></h3>
   </button>
 
@@ -23,9 +23,9 @@
   <%- include ('../modals/my-arenas.ejs') %>
 
 
-  <div id="rooms"></div>
+  <div id="arenas"></div>
 </div>
-<!-- End of the rooms section -->
+<!-- End of the arenas section -->
 
 <br>
 <div id="paint-app">

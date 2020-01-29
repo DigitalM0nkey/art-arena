@@ -168,7 +168,7 @@ span {
   font-family: $font-BODY-TEXT;
   font-size: $size-BODY-TEXT;
 }
-#rooms {
+#arenas {
   display: none;
   font-family: $font-SUB-HEADING;
 }
@@ -208,7 +208,7 @@ span {
   display: none;
 }
 
-.roomsHeading {
+.arenasHeading {
   font-family: $font-SUB-HEADING;
   text-align: center;
   display: flex;
@@ -229,7 +229,7 @@ span {
   border-radius: $round;
 }
 
-#rooms {
+#arenas {
   display: flex;
   flex-direction: column;
   background-color: white;

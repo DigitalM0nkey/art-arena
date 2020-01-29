@@ -41,7 +41,7 @@ router.post("/", ({body}, res, next) => {
           completion: new Date()
         }
       ],
-      arenaName: body.arenaName,
+      name: body.name,
       timeLimit: body.timeLimit,
       //tools: body.tools,
       maxPlayers: body.maxPlayers,
