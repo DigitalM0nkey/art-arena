@@ -1,0 +1,22 @@
+<div class="modal fade" id="select-room" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="create-room" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Arena</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Pick a public arena to play in, or stay and chat in the lobby.
+      </div>
+      <div class="modal-footer" id="defaultRooms">
+        <button type="button" onclick="switchRoom('Arena #1')" class="btn btn-primary" data-dismiss="modal">Arena #1 : Cartoon Colosseum <span id="a1Spots" class="badge badge-light"> 4 spots left</span></button>
+        <button type="button" onclick="switchRoom('Arena #2')" class="btn btn-primary" data-dismiss="modal">Arena #2 : Snapshot Stadium <span id="a2Spots" class="badge badge-light"> 4 spots left</span></button>
+        <button type="button" onclick="switchRoom('Arena #3')" class="btn btn-primary" data-dismiss="modal">Arena #3 : Sketch Standoff <span id="a3Spots" class="badge badge-light"> 3 spots left</span></button>
+        <button type="button" onclick="switchRoom('Arena #4')" class="btn btn-primary" data-dismiss="modal">Arena #4 : Doodle Duel <span id="a4Spots" class="badge badge-light"> 2 spots left</span></button>
+        <button type="button" id="Lobby" class="btn btn-secondary" data-dismiss="modal">Lobby</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -29,7 +29,8 @@ router.get('/:id', (req, res, next) => {
     });*/
 });
 
-router.post('/', ({body}, res, next) => {
+router.post("/", ({body}, res, next) => {
+  console.log(body);
   db.collection("rooms")
     .add({
       players: [
@@ -56,7 +57,3 @@ router.post('/', ({body}, res, next) => {
 })
 
 module.exports = router;
-
-{
-
-}
