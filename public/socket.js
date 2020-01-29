@@ -12,7 +12,7 @@ socket.on("updatechat", function(username, data) {
   $(".alerts").prepend(
     `<div role="alert" aria-live="polite" aria-atomic="true" class="toast-${randNum} toast" data-delay="10000">
     <div id="th" class="toast-header">
-    <i class="fad fa-paint-brush-alt"></i>    
+    <i class="fad fa-paint-brush-alt"></i>
       <strong class="mr-auto">` +
       username +
       `</strong>
@@ -60,7 +60,7 @@ socket.on("updaterooms", function(rooms, current_room) {
       <br><br>
       All messages are localized to whichever room you are currently in.
       <br><br>
-      All messages display for 10 seconds and then self distruct. 
+      All messages display for 10 seconds and then self distruct.
        <p>`);
     console.log("You're in the Lobby");
   } else {

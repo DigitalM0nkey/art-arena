@@ -1,17 +1,18 @@
 const express = require("express");
 const http = require("http");
-const app = express();
+const bodyParser = require('body-parser');
 require('dotenv').config();
 const db = require("./db");
 
-const server = http.createServer(app);
-const sockets = require("./sockets").init(server);
 
+const app = express();
+app.use(bodyParser.json());
 app.use(express.static("public"));
 app.set("view engine", "ejs");
-
 app.use("/api/rooms", require("./api/rooms"));
 
+const server = http.createServer(app);
+const sockets = require("./sockets").init(server);
 server.listen(process.env.PORT || 8080, () => {
   console.log("Server listening on Port 8080");
 });
