@@ -1,0 +1,77 @@
+<div class="modal fade" id="create-arena" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="create-arena" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Create Arena</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Create an public arena to play against strangers or create a private arena and battle with your friends.
+      </div>
+      <div class="modal-body" id="createRoomButtons">
+        <form>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Arena Name</span>
+            </div>
+            <input type="text" class="form-control" placeholder="A Happy Little Arena" aria-label="name" aria-describedby="basic-addon1" id="name">
+          </div>
+          <select class="custom-select mr-sm-2 modal-dd" id="timeLimit">
+            <option selected>Time Limit</option>
+            <option value="5">5 Minutes</option>
+            <option value="720">12 Hours</option>
+            <option value="1440">24 Hours</option>
+            <option value="4320">3 Days</option>
+          </select>
+
+          <select class="custom-select mr-sm-2 modal-dd" id="maxPlayers">
+            <option selected>Max Players</option>
+            <option value="2">2</option>
+            <option value="5">5</option>
+            <option value="7">7</option>
+            <option value="10">10</option>
+          </select>
+
+          <div class="col-auto my-1">
+            <div class="custom-control custom-checkbox mr-sm-2">
+              <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+              <label class="custom-control-label" for="customControlAutosizing">Private Arena</label>
+            </div>
+          </div>
+          <div class="col-auto my-1" id="toolbox">
+            <label class="mr-sm-2" for="checkLine">Toolbox</label>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="checkLine">
+              <label class="custom-control-label" for="checkLine">Line</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="checkWeirdLine">
+              <label class="custom-control-label" for="checkWeirdLine">WeirdLine</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="checkErase">
+              <label class="custom-control-label" for="checkErase">Erase</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="checkSpray">
+              <label class="custom-control-label" for="checkSpray">Spray</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="checkCircle">
+              <label class="custom-control-label" for="checkCircle">Circle</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="checkFlood">
+              <label class="custom-control-label" for="checkFlood">Flood Fill</label>
+            </div>
+          </div>
+          <div class="col-auto my-1">
+            <button type="submit" class="btn btn-primary" onclick="createArena()">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

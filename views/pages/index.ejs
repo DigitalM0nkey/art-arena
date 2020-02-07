@@ -29,56 +29,33 @@
       <%- include ('../partials/_footer.ejs') %>
     </footer>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="socket.js"></script>
     <script src="canvas.js"></script>
     <script>
       $(function() {
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
-            var db = firebase.firestore();
-            // db.collection("rooms")
-            //   .add({
-            //     players: [
-            //       {
-            //         id: firebase.auth().currentUser.uid,
-            //         completion: new Date()
-            //       }
-            //     ],
-            //     limit: 172800000,
-            //     type: "random",
-            //     state: "waiting",
-            //     startDate: Date.now()
-            //   })
-            //   .then(function(docRef) {
-            //     console.log("Document written with ID: ", docRef.id);
-            //   })
-            //   .catch(function(error) {
-            //     console.error("Error adding document: ", error);
-            //   });
-
-            // This recalls any rooms that the user is in
-            db.collection("rooms")
-              .get()
-              .then(querySnapshot => {
-                let rooms = [];
-                querySnapshot.forEach(room => {
-                  rooms.push(room.data());
-                  rooms[rooms.length - 1].id = room.id;
-                });
-                const myRooms = rooms.filter(room =>
-                  room.players.find(player => player.id === user.uid)
+            $.get(
+              "api/arenas",
+              function(arenas) {
+                console.log(arenas);
+                const myArenas = arenas.filter(arena =>
+                  arena.players.find(player => player.id === user.uid)
                 );
-                const availableRooms = rooms.filter(room =>
-                  room.state === 'waiting' && !room.players.find(player => player.id === user.uid)
+                const availableArenas = arenas.filter(arena =>
+                  arena.state === 'waiting' && !arena.players.find(player => player.id === user.uid)
                 );
-                myRooms.forEach(room => {
-                  $('#roomButtons').append(`<button type="button" id="room_${room.id}" class="btn btn-success" data-dismiss="modal" onclick="openRoom('${room.id}')">${room.name}</button>`)
+                myArenas.forEach(arena => {
+                  $('#arenaButtons').append(`<button type="button" id="arena_${arena.id}" class="btn btn-success" data-dismiss="modal" onclick="openArena('${arena.id}')">${arena.name}</button>`)
                 });
-                availableRooms.forEach(room => {
-                  $('#roomButtons').append(`<button type="button" id="room_${room.id}" class="btn btn-warning" data-dismiss="modal" onclick="joinRoom('${room.id}')">${room.name}</button>`)
+                availableArenas.forEach(arena => {
+                  $('#arenaButtons').append(`<button type="button" id="arena_${arena.id}" class="btn btn-warning" data-dismiss="modal" onclick="joinArena('${arena.id}')">${arena.name}</button>`)
                 });
-                console.log("MY-ROOMS =>", myRooms);
-              });
+                console.log("MY-ARENAS =>", myArenas);
+              }
+            );
 
             console.log("User is signed in");
             if ($(window).width() >= 600) {

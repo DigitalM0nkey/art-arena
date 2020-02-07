@@ -12,7 +12,7 @@ socket.on("updatechat", function(username, data) {
   $(".alerts").prepend(
     `<div role="alert" aria-live="polite" aria-atomic="true" class="toast-${randNum} toast" data-delay="10000">
     <div id="th" class="toast-header">
-    <i class="fad fa-paint-brush-alt"></i>    
+    <i class="fad fa-paint-brush-alt"></i>
       <strong class="mr-auto">` +
       username +
       `</strong>
@@ -33,34 +33,34 @@ socket.on("updatechat", function(username, data) {
     });
 });
 
-// listener, whenever the server emits 'updaterooms', this updates the room the client is in
-socket.on("updaterooms", function(rooms, current_room) {
-  console.log("updating rooms!");
+// listener, whenever the server emits 'updatearenas', this updates the arena the client is in
+socket.on("updatearenas", function(arenas, current_arena) {
+  console.log("updating arenas!");
   $(".toast").toast("show");
-  $("#rooms").empty();
-  $.each(rooms, function(key, value) {
-    if (value === current_room) {
+  $("#arenas").empty();
+  $.each(arenas, function(key, value) {
+    if (value === current_arena) {
       $(".toast").toast("show");
-      // $("#rooms").append("<div>" + value + "</div>");
-      //console.log(current_room)
+      // $("#arenas").append("<div>" + value + "</div>");
+      //console.log(current_arena)
     } else {
       $(".toast").toast("show");
-      // $("#rooms").append(
-      //   '<div><a onclick="switchRoom(\'' + value + "')\">" + value + "</a></div>"
+      // $("#arenas").append(
+      //   '<div><a onclick="switchArena(\'' + value + "')\">" + value + "</a></div>"
       // );
     }
   });
-  $("#currentRoom").empty();
-  $("#currentRoom").append(`<h3>You are currently in ${current_room} </h3>`);
-  if (current_room === "Lobby") {
-    $("#currentRoom")
+  $("#currentArena").empty();
+  $("#currentArena").append(`<h3>You are currently in ${current_arena} </h3>`);
+  if (current_arena === "Lobby") {
+    $("#currentArena")
       .append(`<p>Welcome to the lobby! Here you can chat with anybody else that is also in the lobby.
       <br><br>
       You may also doodle on the canvas to get familiar with the tools, then once your game starts, just save your image and reset your canvas.
       <br><br>
-      All messages are localized to whichever room you are currently in.
+      All messages are localized to whichever arena you are currently in.
       <br><br>
-      All messages display for 10 seconds and then self distruct. 
+      All messages display for 10 seconds and then self distruct.
        <p>`);
     console.log("You're in the Lobby");
   } else {
@@ -68,12 +68,12 @@ socket.on("updaterooms", function(rooms, current_room) {
   }
 });
 
-socket.on("updatespots", function(roomSpotsTaken) {
-  console.log(roomSpotsTaken["Arena #1"]);
-  $("#a1Spots").text(`${4 - roomSpotsTaken["Arena #1"]} out of 4 spots left`);
-  $("#a2Spots").text(`${4 - roomSpotsTaken["Arena #2"]} out of 4 spots left`);
-  $("#a3Spots").text(`${3 - roomSpotsTaken["Arena #3"]} out of 3 spots left`);
-  $("#a4Spots").text(`${2 - roomSpotsTaken["Arena #4"]} out of 2 spots left`);
+socket.on("updatespots", function(arenaSpotsTaken) {
+  console.log(arenaSpotsTaken["Arena #1"]);
+  $("#a1Spots").text(`${4 - arenaSpotsTaken["Arena #1"]} out of 4 spots left`);
+  $("#a2Spots").text(`${4 - arenaSpotsTaken["Arena #2"]} out of 4 spots left`);
+  $("#a3Spots").text(`${3 - arenaSpotsTaken["Arena #3"]} out of 3 spots left`);
+  $("#a4Spots").text(`${2 - arenaSpotsTaken["Arena #4"]} out of 2 spots left`);
 });
 
 socket.on("displayphotos", function(images) {
@@ -85,7 +85,7 @@ socket.on("displayphotos", function(images) {
       i++;
     }
   }
-  if (socket.room === "Arena #3") {
+  if (socket.arena === "Arena #3") {
     $("#spot3").css("display", "none");
     $("#spot4").css("display", "none");
   }
@@ -134,15 +134,15 @@ socket.on("logout", function() {
     });
 });
 
-function switchRoom(room) {
-  console.log("Switching rooms => ", room);
-  socket.emit("switchRoom", room);
+function switchArena(arena) {
+  console.log("Switching arenas => ", arena);
+  socket.emit("switchArena", arena);
 }
 
-function joinRoom(roomId) {
+function joinArena(arenaId) {
   var db = firebase.firestore();
-  var room = db.collection("rooms").doc(roomId);
-  room
+  var arena = db.collection("arenas").doc(arenaId);
+  arena
     .update({
       players: firebase.firestore.FieldValue.arrayUnion({
         id: firebase.auth().currentUser.uid,
@@ -157,6 +157,22 @@ function joinRoom(roomId) {
       console.error("Error updating document: ", error);
     });
 }
+
+const createArena = () => {
+  $.post(
+    "api/arenas",
+    {
+      uid: firebase.auth().currentUser.uid,
+      name: $("#name").val(),
+      timeLimit: $("#timeLimit").val(),
+      maxPlayers: $("#maxPlayers").val()
+      // tools:
+    },
+    function(data) {
+      console.log("DATA", data);
+    }
+  );
+};
 
 // on load of page
 $(function() {
