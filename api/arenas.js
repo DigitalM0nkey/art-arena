@@ -2,7 +2,7 @@ const router = require('express').Router();
 const db = require('../db');
 
 router.get('/', (req, res, next) => {
-  db.collection("arenas")
+  db.collection('arenas')
     .get()
     .then(querySnapshot => {
       let arenas = [];
@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
         arenas.push(arena.data());
         arenas[arenas.length - 1].id = arena.id;
       });
-      console.log(arenas);
+      //console.log(arenas);
       res.json(arenas);
     });
 });
@@ -29,11 +29,11 @@ router.get('/:id', (req, res, next) => {
     });*/
 });
 
-router.post("/", ({body}, res, next) => {
+router.post('/', ({body}, res, next) => {
   console.log('---');
   console.log(body);
   console.log('---');
-  db.collection("arenas")
+  db.collection('arenas')
     .add({
       players: [
         {
@@ -42,19 +42,19 @@ router.post("/", ({body}, res, next) => {
         }
       ],
       name: body.name,
-      timeLimit: body.timeLimit,
+      timeLimit: parseInt(body.timeLimit),
       //tools: body.tools,
-      maxPlayers: body.maxPlayers,
+      maxPlayers: parseInt(body.maxPlayers),
       state: "waiting",
       startDate: Date.now()
     })
     .then(docRef => {
-      console.log("Document written with ID: ", docRef.id);
+      console.log('Document written with ID: ', docRef.id);
       res.json(docRef);
     })
     .catch(error => {
-      console.error("Error adding document: ", error);
-      res.status(500).send("Error saving arena");
+      console.error('Error adding document: ', error);
+      res.status(500).send('Error saving arena');
     });
 })
 

@@ -47,11 +47,11 @@
                 const availableArenas = arenas.filter(arena =>
                   arena.state === 'waiting' && !arena.players.find(player => player.id === user.uid)
                 );
-                myArenas.forEach(arena => {
-                  $('#arenaButtons').append(`<button type="button" id="arena_${arena.id}" class="btn btn-success" data-dismiss="modal" onclick="openArena('${arena.id}')">${arena.name}</button>`)
-                });
                 availableArenas.forEach(arena => {
-                  $('#arenaButtons').append(`<button type="button" id="arena_${arena.id}" class="btn btn-warning" data-dismiss="modal" onclick="joinArena('${arena.id}')">${arena.name}</button>`)
+                  $('#availableArenas').append(`<button type="button" id="arena_${arena.id}" class="btn btn-success" data-dismiss="modal" onclick="joinArena('${arena.id}')">${arena.name} <span class="badge badge-light"> ${arena.maxPlayers - arena.players.length} of ${arena.maxPlayers} spots left</span></button>`)
+                });
+                myArenas.forEach(arena => {
+                  $('#myArenas').append(`<button type="button" id="arena_${arena.id}" class="btn btn-success" data-dismiss="modal" onclick="openArena('${arena.id}')">${arena.name}</button>`)
                 });
                 console.log("MY-ARENAS =>", myArenas);
               }
