@@ -60,7 +60,7 @@ socket.on("updatearenas", function(arenas, current_arena) {
       <br><br>
       All messages are localized to whichever arena you are currently in.
       <br><br>
-      All messages display for 10 seconds and then self distruct.
+      All messages display for 10 seconds and then self destruct.
        <p>`);
     console.log("You're in the Lobby");
   } else {
@@ -156,6 +156,10 @@ function joinArena(arenaId) {
       // The document probably doesn't exist.
       console.error("Error updating document: ", error);
     });
+}
+
+function openArena(arenaId) {
+  console.log(arenaId);
 }
 
 const createArena = () => {
