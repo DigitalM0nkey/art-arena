@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const admin = require("firebase-admin");
 const db = require('../db');
 
 router.get('/', (req, res, next) => {
@@ -16,20 +17,15 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
-  /*
-  db.collection("rooms")
-    .get()
-    .then(querySnapshot => {
-      let rooms = [];
-      querySnapshot.forEach(room => {
-        rooms.push(room.data());
-        rooms[rooms.length - 1].id = room.id;
-      });
-      res.json(rooms);
-    });*/
+  const arenaRef = db.collection('arenas').doc(req.params.id)
+  arenaRef.get()
+    .then(arena => {
+      console.log(arena.data());
+      res.json(arena.data());
+    });
 });
 
-router.post('/', ({body}, res, next) => {
+router.post('/create', ({body}, res, next) => {
   console.log('---');
   console.log(body);
   console.log('---');
@@ -56,6 +52,28 @@ router.post('/', ({body}, res, next) => {
       console.error('Error adding document: ', error);
       res.status(500).send('Error saving arena');
     });
-})
+});
+
+router.post('/join', ({body}, res, next) => {
+  console.log('---');
+  console.log(body);
+  console.log('---');
+  var arena = db.collection('arenas').doc(body.arenaId);
+  arena
+    .update({
+      players: admin.firestore.FieldValue.arrayUnion({
+        id: body.uid,
+        completion: new Date()
+      })
+    })
+    .then(function(docRef) {
+      console.log('Document written with ID: ', docRef.id);
+      res.json(docRef);
+    })
+    .catch(function(error) {
+      console.error('Error adding document: ', error);
+      res.status(500).send('Error saving arena');
+    });
+});
 
 module.exports = router;

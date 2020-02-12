@@ -404,8 +404,8 @@ controls.download = function() {
 // };
 const save = dir => {
   const file = document.getElementById("my-canvas").toDataURL();
-  const randomNum = Math.random() * 100000000000000000;
   const uid = firebase.auth().currentUser.uid;
+  console.log(`Saving to ${uid}/${currentArena.id}`);
 
   // Create the file metadata
   const metadata = {
@@ -414,7 +414,7 @@ const save = dir => {
 
   // Upload file and metadata to the object 'images/mountains.jpg'
   let uploadTask = storageRef
-    .child(uid + "/" + randomNum.toString())
+    .child(uid + "/" + currentArena.id)
     .putString(file, "data_url");
 
   // Listen for state changes, errors, and completion of the upload.

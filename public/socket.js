@@ -1,4 +1,5 @@
-var socket = io.connect();
+
+const socket = io.connect();
 
 // on connection to server, ask for user's name with an anonymous callback
 socket.on("connect", function() {
@@ -140,31 +141,44 @@ function switchArena(arena) {
 }
 
 function joinArena(arenaId) {
-  var db = firebase.firestore();
-  var arena = db.collection("arenas").doc(arenaId);
-  arena
-    .update({
-      players: firebase.firestore.FieldValue.arrayUnion({
-        id: firebase.auth().currentUser.uid,
-        completion: new Date()
-      })
-    })
-    .then(function() {
-      console.log("Document successfully updated!");
-    })
-    .catch(function(error) {
-      // The document probably doesn't exist.
-      console.error("Error updating document: ", error);
-    });
+  $.post(
+    "api/arenas/join",
+    {
+      uid: firebase.auth().currentUser.uid,
+      arena: arenaId
+    },
+    function(data) {
+      console.log("DATA", data);
+    }
+  );
 }
 
 function openArena(arenaId) {
   console.log(arenaId);
+  $.get(
+    `api/arenas/${arenaId}`,
+    function(data) {
+      currentArena = data;
+      currentArena.id = arenaId;
+      console.log(currentArena);
+      currentArena.players.forEach(player => {
+        $('#paintings').append(`
+          <div class="card">
+            <img id="image-${player.id}" src="" />
+            <div class="card-body">
+              <h5 class="card-title">Vote 4 Me!</h5>
+              <input class="btn btn-primary vote" type="button" id="vote-${player.id}" value="Vote" />
+            </div>
+          </div>`
+        );
+      })
+    }
+  );
 }
 
 const createArena = () => {
   $.post(
-    "api/arenas",
+    "api/arenas/create",
     {
       uid: firebase.auth().currentUser.uid,
       name: $("#name").val(),
@@ -177,6 +191,7 @@ const createArena = () => {
     }
   );
 };
+
 
 // on load of page
 $(function() {
