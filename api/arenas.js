@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const admin = require("firebase-admin");
+const admin = require('firebase-admin');
 const db = require('../db');
+const pics = require('../modules/pics')
 
 router.get('/', (req, res, next) => {
   db.collection('arenas')
@@ -17,8 +18,8 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
-  const arenaRef = db.collection('arenas').doc(req.params.id)
-  arenaRef.get()
+  const arena = db.collection('arenas').doc(req.params.id)
+  arena.get()
     .then(arena => {
       console.log(arena.data());
       res.json(arena.data());
@@ -29,6 +30,7 @@ router.post('/create', ({body}, res, next) => {
   console.log('---');
   console.log(body);
   console.log('---');
+  const type = body.type ? body.type : 'cartoon';
   db.collection('arenas')
     .add({
       players: [
@@ -39,6 +41,8 @@ router.post('/create', ({body}, res, next) => {
       ],
       name: body.name,
       timeLimit: parseInt(body.timeLimit),
+      type,
+      imageUrl: pics.get(type),
       //tools: body.tools,
       maxPlayers: parseInt(body.maxPlayers),
       state: "waiting",

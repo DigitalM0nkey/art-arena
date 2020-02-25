@@ -1,3 +1,5 @@
+const pics = require('./modules/pics');
+
 exports.init = (server) => {
   const io = require("socket.io")(server, {
     // below are engine.IO options
@@ -94,7 +96,7 @@ exports.init = (server) => {
         socket.emit("updatearenas", arenas.map(arena => arena.name), newarena);
 
         if (nextArena.players === nextArena.maxPlayers) {
-          let stockImage = randomCartoon();
+          let stockImage = pics.get('cartoon');
           arenaImages[newarena] = { reference: stockImage };
           arenaVotes[newarena] = { total: 0 };
           io.in(newarena).emit("displayreference", arenaImages[newarena]);
@@ -251,29 +253,6 @@ let arenas = [
     votes: {}
   }
 ];
-
-// Random Cartoon
-// https://robohash.org/khjasfghjgdflkjb.png?set=set2
-const randomCartoon = () => {
-  const randomNum = Math.floor(Math.random() * 10000000);
-  const setNum = Math.ceil(Math.random() * 5);
-  return `https://robohash.org/${randomNum}.png?set=set${setNum}`;
-};
-
-const randomImage = function() {
-  const randomNumber = Math.ceil(Math.random() * 85);
-  return `https://picsum.photos/id/${randomNumber}/500/300`;
-};
-
-// Random Random
-const randomRandom = () => {
-  const randomNumber = Math.ceil(Math.random() * 2);
-  if (randomNumber === 1) {
-    return randomCartoon();
-  } else {
-    return randomImage();
-  }
-};
 
 const arenaSpotsTaken = () =>
   arenas.reduce((arenaSpotsTaken, arena) => {

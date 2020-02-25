@@ -12,10 +12,11 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 app.use("/api/arenas", require("./api/arenas"));
+app.use("/api/images", require("./api/images"));
 app.use(express.static("public"));
 
 const server = http.createServer(app);
-const sockets = require("./sockets").init(server);
+const sockets = require("./socket-server").init(server);
 server.listen(process.env.PORT || 8080, () => {
   console.log("Server listening on Port 8080");
 });
