@@ -3,7 +3,7 @@ function switchArena(arena) {
   socket.emit("switchArena", arena);
 }
 
-function joinArena(arenaId) {
+const joinArena = arenaId => {
   $.post(
     "api/arenas/join",
     {
@@ -14,9 +14,9 @@ function joinArena(arenaId) {
       console.log("DATA", data);
     }
   );
-}
+};
 
-function openArena(arenaId) {
+const openArena = arenaId => {
   console.log(arenaId);
   $.get(`api/arenas/${arenaId}`, function(data) {
     currentArena = data;
@@ -38,7 +38,7 @@ function openArena(arenaId) {
           </div>`);
     });
   });
-}
+};
 
 const createArena = () => {
   $.post(

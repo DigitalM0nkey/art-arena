@@ -254,6 +254,7 @@ span {
   border: 5px solid black;
   border-radius: $round;
   flex-shrink: 0;
+  max-width: 100%;
 }
 
 .drawingURL {
