@@ -19,8 +19,13 @@ const imageSources = {
       request.get(
         `https://api.unsplash.com/photos/random?client_id=${process.env.UNSPLASH_ACCES_KEY}`,
         (err, response) => {
-          if (err) resolve(imageSources.photo());
-          resolve(JSON.parse(response.body).urls.regular);
+          if (err) reject();
+          const body = JSON.parse(response.body);
+          if (body) {
+            resolve(body.urls.regular);
+          } else {
+            reject();
+          }
         }
       );
     })

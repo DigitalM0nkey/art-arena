@@ -6,7 +6,17 @@ router.get("/types", (req, res, next) => {
 });
 
 router.get("/:type", (req, res, next) => {
-  pics.get(req.params.type).then(url => res.json(url));
+  pics.get(req.params.type).then(
+    url => res.json(url),
+    err => {
+      pics.get("photo").then(
+        url => res.json(url),
+        err => {
+          pics.get("cartoon").then(url => res.json(url));
+        }
+      );
+    }
+  );
 });
 
 module.exports = router;
