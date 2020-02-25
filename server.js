@@ -1,16 +1,18 @@
 const express = require("express");
 const http = require("http");
-const bodyParser = require('body-parser');
-require('dotenv').config();
+const bodyParser = require("body-parser");
+require("dotenv").config();
 const db = require("./db");
-
 
 const app = express();
 app.set("view engine", "ejs");
-app.use(bodyParser.json());   // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
-}));
+app.use(bodyParser.json()); // to support JSON-encoded bodies
+app.use(
+  bodyParser.urlencoded({
+    // to support URL-encoded bodies
+    extended: true
+  })
+);
 app.use("/api/arenas", require("./api/arenas"));
 app.use("/api/images", require("./api/images"));
 app.use(express.static("public"));

@@ -1,7 +1,7 @@
-const switchArena = arena => {
+function switchArena(arena) {
   console.log("Switching arenas => ", arena);
   socket.emit("switchArena", arena);
-};
+}
 
 const joinArena = arenaId => {
   $.post(

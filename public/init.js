@@ -83,12 +83,11 @@ $(function() {
   const displayImage = () => {
     console.log("HIIIIIIIII");
 
-    $.get(`api/images/types`, function(types) {
+    getImageTypes(function(types) {
       console.log("TYPES =>", types);
-
       for (let type in types) {
         $(`#imageType`).append(
-          `<option value="${type}">${types[type]}</option>`
+          `<option value="${type}">${types[type].capitalize()}</option>`
         );
       }
     });

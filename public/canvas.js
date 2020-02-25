@@ -782,7 +782,9 @@ tools["Flood Fill"] = function(event, cx) {
 };
 
 $("#solo").click(function() {
-  $("#mainImage").append();
+  getImage("photo", function(url) {
+    $("#mainImage").attr("src", url);
+  });
 });
 
 // initialize the app

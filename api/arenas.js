@@ -1,10 +1,10 @@
-const router = require('express').Router();
-const admin = require('firebase-admin');
-const db = require('../db');
-const pics = require('../modules/pics')
+const router = require("express").Router();
+const admin = require("firebase-admin");
+const db = require("../db");
+const pics = require("../modules/pics");
 
-router.get('/', (req, res, next) => {
-  db.collection('arenas')
+router.get("/", (req, res, next) => {
+  db.collection("arenas")
     .get()
     .then(querySnapshot => {
       let arenas = [];
@@ -17,52 +17,53 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.get('/:id', (req, res, next) => {
-  const arena = db.collection('arenas').doc(req.params.id)
-  arena.get()
-    .then(arena => {
-      console.log(arena.data());
-      res.json(arena.data());
-    });
+router.get("/:id", (req, res, next) => {
+  const arena = db.collection("arenas").doc(req.params.id);
+  arena.get().then(arena => {
+    console.log(arena.data());
+    res.json(arena.data());
+  });
 });
 
-router.post('/create', ({body}, res, next) => {
-  console.log('---');
+router.post("/create", ({ body }, res, next) => {
+  console.log("---");
   console.log(body);
-  console.log('---');
-  const type = body.type ? body.type : 'cartoon';
-  db.collection('arenas')
-    .add({
-      players: [
-        {
-          id: body.uid,
-          completion: new Date()
-        }
-      ],
-      name: body.name,
-      timeLimit: parseInt(body.timeLimit),
-      type,
-      imageUrl: pics.get(type),
-      //tools: body.tools,
-      maxPlayers: parseInt(body.maxPlayers),
-      state: "waiting",
-      startDate: Date.now()
-    })
-    .then(docRef => {
-      console.log('Document written with ID: ', docRef.id);
-      res.json(docRef);
-    })
-    .catch(error => {
-      console.error('Error adding document: ', error);
-      res.status(500).send('Error saving arena');
-    });
+  console.log("---");
+  const type = body.type ? body.type : "cartoon";
+  pics.get(type).then(url => {
+    db.collection("arenas")
+      .add({
+        players: [
+          {
+            id: body.uid,
+            completion: new Date()
+          }
+        ],
+        name: body.name,
+        timeLimit: parseInt(body.timeLimit),
+        type,
+        imageUrl: url,
+        //tools: body.tools,
+        maxPlayers: parseInt(body.maxPlayers),
+        state: "waiting",
+        startDate: Date.now()
+      })
+      .then(docRef => {
+        console.log("Document written with ID: ", docRef.id);
+        res.json(docRef);
+      })
+      .catch(error => {
+        console.error("Error adding document: ", error);
+        res.status(500).send("Error saving arena");
+      });
+  });
 });
 
-router.post('/join', ({body}, res, next) => {
-  console.log('---');
+router.post("/join", ({ body }, res, next) => {
+  console.log("---");
   console.log(body);
-  console.log('---');
-  var arena = db.collection('arenas').doc(body.arenaId);
+  console.log("---");
+  var arena = db.collection("arenas").doc(body.arena);
   arena
     .update({
       players: admin.firestore.FieldValue.arrayUnion({
@@ -71,12 +72,12 @@ router.post('/join', ({body}, res, next) => {
       })
     })
     .then(function(docRef) {
-      console.log('Document written with ID: ', docRef.id);
+      console.log("Document written with ID: ", docRef.id);
       res.json(docRef);
     })
     .catch(function(error) {
-      console.error('Error adding document: ', error);
-      res.status(500).send('Error saving arena');
+      console.error("Error adding document: ", error);
+      res.status(500).send("Error saving arena");
     });
 });
 
