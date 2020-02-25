@@ -6,7 +6,7 @@ const imageSources = {
     const setNum = Math.ceil(Math.random() * 5);
     return `https://robohash.org/${randomNum}.png?set=set${setNum}`;
   },
-  image: () => {
+  photo: () => {
     const randomNumber = Math.ceil(Math.random() * 85);
     return `https://picsum.photos/id/${randomNumber}/500/300`;
   }
@@ -19,11 +19,11 @@ exports.get = (type) => {
     case 'cartoon':
       return imageSources.cartoon();
       break;
-    case 'image':
-      return imageSources.image();
+    case 'photo':
+      return imageSources.photo();
       break;
     default:
       const types = Object.keys(imageSources);
-      return imageSources[types[Math.floor(Math.random() * types.length)]] ? randomCartoon() : randomImage();
+      return imageSources[types[Math.floor(Math.random() * types.length)]]();
   }
 }
