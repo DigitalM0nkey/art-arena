@@ -9,7 +9,7 @@ router.get("/:type", (req, res, next) => {
   pics.get(req.params.type).then(
     url => res.json(url),
     err => {
-      console.error(err);
+      console.errorA(err);
       pics.get("photo").then(
         url => res.json(url),
         err => {

@@ -22,6 +22,7 @@ const imageSources = {
           if (err) reject();
           const body = JSON.parse(response.body);
           if (body) {
+            console.log(body);
             resolve(body.urls.regular);
           } else {
             reject();
