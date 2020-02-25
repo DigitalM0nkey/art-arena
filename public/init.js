@@ -87,7 +87,7 @@ $(function() {
       console.log("TYPES =>", types);
       for (let type in types) {
         $(`#imageType`).append(
-          `<option value="${type}">${types[type].capitalize()}</option>`
+          `<option value="${types[type]}">${types[type].capitalize()}</option>`
         );
       }
     });
