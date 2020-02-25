@@ -255,6 +255,7 @@ span {
   border-radius: 1rem;
   -ms-flex-negative: 0;
       flex-shrink: 0;
+  max-width: 100%;
 }
 
 .drawingURL {
