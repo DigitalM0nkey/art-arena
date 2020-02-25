@@ -23,40 +23,58 @@
     </div>
     <div class="authorized">
       <%- include ('../partials/_body.ejs') %>
-
     </div>
 
     <footer>
       <%- include ('../partials/_footer.ejs') %>
     </footer>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="/public/init.js"></script>
     <script src="socket.js"></script>
     <script src="canvas.js"></script>
     <script>
       $(function() {
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
-            $.get(
-              "api/arenas",
-              function(arenas) {
-                console.log(arenas);
-                const myArenas = arenas.filter(arena =>
-                  arena.players.find(player => player.id === user.uid)
+            $.get("api/arenas", function(arenas) {
+              console.log(arenas);
+              const myArenas = arenas.filter(arena =>
+                arena.players.find(player => player.id === user.uid)
+              );
+              const availableArenas = arenas.filter(
+                arena =>
+                  arena.state === "waiting" &&
+                  !arena.players.find(player => player.id === user.uid)
+              );
+              availableArenas.forEach(arena => {
+                $("#availableArenas").append(
+                  `<button type="button" id="arena_${
+                    arena.id
+                  }" class="btn btn-success" data-dismiss="modal" onclick="joinArena('${
+                    arena.id
+                  }')">${
+                    arena.name
+                  } <span class="badge badge-light"> ${arena.maxPlayers -
+                    arena.players.length} of ${
+                    arena.maxPlayers
+                  } spots left</span></button>`
                 );
-                const availableArenas = arenas.filter(arena =>
-                  arena.state === 'waiting' && !arena.players.find(player => player.id === user.uid)
+              });
+              myArenas.forEach(arena => {
+                $("#myArenas").append(
+                  `<button type="button" id="arena_${arena.id}" class="btn btn-success" data-dismiss="modal" onclick="openArena('${arena.id}')">${arena.name}</button>`
                 );
-                availableArenas.forEach(arena => {
-                  $('#availableArenas').append(`<button type="button" id="arena_${arena.id}" class="btn btn-success" data-dismiss="modal" onclick="joinArena('${arena.id}')">${arena.name} <span class="badge badge-light"> ${arena.maxPlayers - arena.players.length} of ${arena.maxPlayers} spots left</span></button>`)
-                });
-                myArenas.forEach(arena => {
-                  $('#myArenas').append(`<button type="button" id="arena_${arena.id}" class="btn btn-success" data-dismiss="modal" onclick="openArena('${arena.id}')">${arena.name}</button>`)
-                });
-                console.log("MY-ARENAS =>", myArenas);
-              }
-            );
+              });
+              console.log("MY-ARENAS =>", myArenas);
+            });
 
             console.log("User is signed in");
             if ($(window).width() >= 600) {

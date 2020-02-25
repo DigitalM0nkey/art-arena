@@ -16,6 +16,7 @@ p {
 .btn {
   font-family: "Averia Sans Libre", cursive;
   font-size: 1.5rem;
+  margin: 0.5rem 0 0.5rem;
 }
 
 main {

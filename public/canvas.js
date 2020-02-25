@@ -781,6 +781,10 @@ tools["Flood Fill"] = function(event, cx) {
   }
 };
 
+$("#solo").click(function() {
+  $("#mainImage").append();
+});
+
 // initialize the app
 let appDiv = document.getElementById("canvasDiv");
 createPaint(appDiv);
