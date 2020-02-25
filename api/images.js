@@ -1,12 +1,12 @@
-const router = require('express').Router();
-const pics = require('../modules/pics');
+const router = require("express").Router();
+const pics = require("../modules/pics");
 
-router.get('/types', (req, res, next) => {
+router.get("/types", (req, res, next) => {
   res.json(pics.types());
 });
 
-router.get('/:type', (req, res, next) => {
-  res.json(pics.get(req.params.type));
+router.get("/:type", (req, res, next) => {
+  pics.get(req.params.type).then(url => res.json(url));
 });
 
 module.exports = router;

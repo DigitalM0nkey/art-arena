@@ -30,31 +30,33 @@ router.post("/create", ({ body }, res, next) => {
   console.log(body);
   console.log("---");
   const type = body.type ? body.type : "cartoon";
-  db.collection("arenas")
-    .add({
-      players: [
-        {
-          id: body.uid,
-          completion: new Date()
-        }
-      ],
-      name: body.name,
-      timeLimit: parseInt(body.timeLimit),
-      type,
-      imageUrl: pics.get(type),
-      //tools: body.tools,
-      maxPlayers: parseInt(body.maxPlayers),
-      state: "waiting",
-      startDate: Date.now()
-    })
-    .then(docRef => {
-      console.log("Document written with ID: ", docRef.id);
-      res.json(docRef);
-    })
-    .catch(error => {
-      console.error("Error adding document: ", error);
-      res.status(500).send("Error saving arena");
-    });
+  pics.get(type).then(url => {
+    db.collection("arenas")
+      .add({
+        players: [
+          {
+            id: body.uid,
+            completion: new Date()
+          }
+        ],
+        name: body.name,
+        timeLimit: parseInt(body.timeLimit),
+        type,
+        imageUrl: url,
+        //tools: body.tools,
+        maxPlayers: parseInt(body.maxPlayers),
+        state: "waiting",
+        startDate: Date.now()
+      })
+      .then(docRef => {
+        console.log("Document written with ID: ", docRef.id);
+        res.json(docRef);
+      })
+      .catch(error => {
+        console.error("Error adding document: ", error);
+        res.status(500).send("Error saving arena");
+      });
+  });
 });
 
 router.post("/join", ({ body }, res, next) => {
