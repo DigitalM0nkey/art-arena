@@ -48,10 +48,16 @@ router.post("/", ({
   const bucket = admin.storage().bucket('gs://artarena-fb540.appspot.com');
   const file = bucket.file(`new/${uid}/${arena}`);
 
-  file.createWriteStream()
+  file.createWriteStream({
+      metadata: {
+        contentType: 'image/png'
+      },
+      public: true,
+      validation: "md5"
+    })
     .on('error', function(err) {})
     .on('finish', function() {
-      res.send('done')
+      res.send('done');
     })
     .end(imageBuffer);
   /*
