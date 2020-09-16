@@ -25,7 +25,9 @@ router.get("/:id", (req, res, next) => {
   });
 });
 
-router.post("/create", ({ body }, res, next) => {
+router.post("/create", ({
+  body
+}, res, next) => {
   console.log("---");
   console.log(body);
   console.log("---");
@@ -33,12 +35,10 @@ router.post("/create", ({ body }, res, next) => {
   pics.get(type).then((url) => {
     db.collection("arenas")
       .add({
-        players: [
-          {
-            id: body.uid,
-            completion: new Date(),
-          },
-        ],
+        players: [{
+          id: body.uid,
+          completion: new Date(),
+        }, ],
         name: body.name,
         timeLimit: parseInt(body.timeLimit),
         type,
@@ -59,7 +59,9 @@ router.post("/create", ({ body }, res, next) => {
   });
 });
 
-router.post("/join", ({ body }, res, next) => {
+router.post("/join", ({
+  body
+}, res, next) => {
   console.log("---");
   console.log(body);
   console.log("---");
@@ -71,17 +73,16 @@ router.post("/join", ({ body }, res, next) => {
         completion: new Date(),
       }),
     })
-    .then(function (docRef) {
+    .then(function(docRef) {
       console.log("Document written with ID [Join]: ", docRef.id);
       res.json(docRef);
     })
-    .catch(function (error) {
+    .catch(function(error) {
       console.error("Error adding document: ", error);
       res.status(500).send("Error saving arena");
     });
 });
 
-<<<<<<< HEAD
 router.post("/pic", ({
   body
 }, res, next) => {
@@ -106,6 +107,3 @@ router.post("/pic", ({
 });
 
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> 14220ffdf329bca3a25279d299814ac66ccf9adc
