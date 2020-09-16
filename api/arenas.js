@@ -83,4 +83,27 @@ router.post("/join", ({
     });
 });
 
+router.post("/pic", ({
+  body
+}, res, next) => {
+
+  const contents = body.file;
+  const uid = body.uid;
+  const arena = body.arena;
+  console.log(`Saving to ${uid}/${arena}`);
+
+  const bucket = admin.storage().bucket();
+  const file = bucket.file(`new/${uid}/${arena}`);
+
+  file.save(contents, function(err) {
+    if (!err) {
+      file.get().then(function(data) {
+        res.json(data);
+      });
+    }
+  });
+
+
+});
+
 module.exports = router;

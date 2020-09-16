@@ -7,14 +7,20 @@ function createPaint(parentElement) {
     height: "360vh"
   });
   var cx = canvas.getContext("2d");
-  var toolbar = elt("div", { class: "toolbar" });
+  var toolbar = elt("div", {
+    class: "toolbar"
+  });
 
   // calls the every function in controls, passing in context,
   // then appending the returned results to the toolbar
   for (var name in controls) toolbar.appendChild(controls[name](cx));
 
-  var panel = elt("div", { class: "picturepanel" }, canvas);
-  parentElement.appendChild(elt("div", { id: "toRemove" }, panel, toolbar));
+  var panel = elt("div", {
+    class: "picturepanel"
+  }, canvas);
+  parentElement.appendChild(elt("div", {
+    id: "toRemove"
+  }, panel, toolbar));
 }
 
 const state = [];
@@ -152,7 +158,10 @@ function randomPointInRadius(radius) {
     var x = Math.random() * 2 - 1;
     var y = Math.random() * 2 - 1;
     // uses the Pythagorean theorem to test if a point is inside a circle
-    if (x * x + y * y <= 1) return { x: x * radius, y: y * radius };
+    if (x * x + y * y <= 1) return {
+      x: x * radius,
+      y: y * radius
+    };
   }
 }
 
@@ -161,7 +170,9 @@ function randomPointInRadius(radius) {
 var controls = Object.create(null);
 
 controls.tool = function(cx) {
-  let select = elt("select", { class: "btn-primary dropdown-toggle" });
+  let select = elt("select", {
+    class: "btn-primary dropdown-toggle"
+  });
 
   // populate the tools
   for (var name in tools) select.appendChild(elt("option", null, name));
@@ -206,7 +217,9 @@ controls.color = function(cx) {
 
 // brush size module
 controls.brushSize = function(cx) {
-  let select = elt("select", { class: "btn-primary dropdown-toggle" });
+  let select = elt("select", {
+    class: "btn-primary dropdown-toggle"
+  });
   // select.classList.add("select");
   // various brush sizes
   let sizes = [
@@ -314,7 +327,9 @@ controls.brushSize = function(cx) {
 
   // build up a select group of size options
   sizes.forEach(function(size) {
-    select.appendChild(elt("option", { value: size }, size + " pixels"));
+    select.appendChild(elt("option", {
+      value: size
+    }, size + " pixels"));
   });
 
   // on change, set the new stroke thickness
@@ -338,8 +353,7 @@ const download = () => {
 
 controls.undo = function() {
   let link = elt(
-    "button",
-    {
+    "button", {
       type: "button",
       class: "btn-info btn undo",
       onclick: "undo()"
@@ -358,8 +372,11 @@ controls.undo = function() {
 // };
 controls.download = function() {
   let link = elt(
-    "button",
-    { type: "button", class: "btn-info btn download", onclick: "download()" },
+    "button", {
+      type: "button",
+      class: "btn-info btn download",
+      onclick: "download()"
+    },
     "Download"
   );
   return link;
@@ -457,6 +474,7 @@ const save = dir => {
         $(".myDrawingURL").text(downloadURL);
         $("#myDrawing").attr("src", downloadURL);
         $("#copy").attr("data-clipboard-text", downloadURL);
+        submitPicture().then()
       });
     }
   );
@@ -532,8 +550,7 @@ const save = dir => {
 
 controls.reset = function(cx) {
   let link = elt(
-    "button",
-    {
+    "button", {
       type: "button",
       class: "btn btn-danger reset",
       "data-toggle": "modal",
@@ -722,10 +739,22 @@ tools.circle = function(event, cx) {
 
 // iterates over N, S, E and W neighbors and performs a function fn
 function forEachNeighbor(point, fn) {
-  fn({ x: point.x - 1, y: point.y });
-  fn({ x: point.x + 1, y: point.y });
-  fn({ x: point.x, y: point.y - 1 });
-  fn({ x: point.x, y: point.y + 1 });
+  fn({
+    x: point.x - 1,
+    y: point.y
+  });
+  fn({
+    x: point.x + 1,
+    y: point.y
+  });
+  fn({
+    x: point.x,
+    y: point.y - 1
+  });
+  fn({
+    x: point.x,
+    y: point.y + 1
+  });
 }
 
 // checks if 2 points in data, point1 and point2, have the same color

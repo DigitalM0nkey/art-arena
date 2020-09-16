@@ -5,8 +5,7 @@ function switchArena(arena) {
 
 const joinArena = arenaId => {
   $.post(
-    "api/arenas/join",
-    {
+    "api/arenas/join", {
       uid: firebase.auth().currentUser.uid,
       arena: arenaId
     },
@@ -42,8 +41,7 @@ const openArena = arenaId => {
 
 const createArena = () => {
   $.post(
-    "api/arenas/create",
-    {
+    "api/arenas/create", {
       uid: firebase.auth().currentUser.uid,
       name: $("#name").val(),
       timeLimit: $("#timeLimit").val(),
@@ -53,6 +51,20 @@ const createArena = () => {
     },
     function(data) {
       console.log("DATA", data);
+    }
+  );
+};
+
+const submitPicture = () => {
+  $.post(
+    "api/arenas/pic", {
+      uid: firebase.auth().currentUser.uid,
+      file: document.getElementById("my-canvas").toDataURL(),
+      arena: currentArena.id
+    },
+    function(data) {
+      console.log("DATA", data);
+      console.log('pic submitted!');
     }
   );
 };
