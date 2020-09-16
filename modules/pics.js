@@ -17,7 +17,7 @@ const imageSources = {
   unsplash: () =>
     new Promise(function(resolve, reject) {
       request.get(
-        `https://api.unsplash.com/photos/random?client_id=${process.env.UNSPLASH_ACCES_KEY}`,
+        `https://api.unsplash.com/photos/random?client_id=${process.env.UNSPLASH_ACCESS_KEY}`,
         (err, response) => {
           if (err) reject();
           const body = JSON.parse(response.body);
