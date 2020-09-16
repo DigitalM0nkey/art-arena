@@ -54,17 +54,3 @@ const createArena = () => {
     }
   );
 };
-
-const submitPicture = () => {
-  $.post(
-    "api/arenas/pic", {
-      uid: firebase.auth().currentUser.uid,
-      file: document.getElementById("my-canvas").toDataURL(),
-      arena: currentArena.id
-    },
-    function(data) {
-      console.log("DATA", data);
-      console.log('pic submitted!');
-    }
-  );
-};
