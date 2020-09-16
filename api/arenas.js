@@ -93,7 +93,7 @@ router.post("/pic", ({
   console.log(`Saving to ${uid}/${arena}`);
 
   const bucket = admin.storage().bucket('gs://artarena-fb540.appspot.com');
-  const file = bucket.file(`new/${uid}/${arena}`);
+  const file = bucket.file(`new/${uid}/${arena}.png`);
 
   file.save(contents, function(err) {
     if (!err) {
