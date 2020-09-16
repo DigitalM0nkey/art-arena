@@ -41,6 +41,7 @@ router.post("/", ({
 
   const bufferStream = new stream.PassThrough();
   // strip off the data: url prefix to get just the base64-encoded bytes
+  console.log(contents.substring(0, 50));
   var data = contents.replace(/^data:image\/\w+;base64,/, "");
 
   bufferStream.end(Buffer.from(data, 'base64'));
@@ -62,7 +63,7 @@ router.post("/", ({
     }))
     .on('error', function(err) {})
     .on('finish', function() {
-      res.json(data);
+      res.json(`new/${uid}/${arena}`);
     });
   /*
     file.save(data, function(err) {
