@@ -53,7 +53,7 @@ router.post("/", ({
 
   bufferStream.pipe(file.createWriteStream({
       metadata: {
-        contentType: 'image/png',
+        contentType: 'data_url',
         metadata: {
           custom: 'metadata'
         }
