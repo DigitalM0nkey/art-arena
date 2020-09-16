@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const admin = require("firebase-admin");
 const pics = require("../modules/pics");
+const stream = require('stream');
 
 router.get("/types", (req, res, next) => {
   res.json(pics.types());
@@ -38,21 +39,40 @@ router.post("/", ({
   });
   */
 
+  const bufferStream = new stream.PassThrough();
   // strip off the data: url prefix to get just the base64-encoded bytes
   var data = contents.replace(/^data:image\/\w+;base64,/, "");
-  var buf = new Buffer(data, 'base64');
+
+  bufferStream.end(Buffer.from(data, 'base64'));
+
 
   const bucket = admin.storage().bucket('gs://artarena-fb540.appspot.com');
   const file = bucket.file(`new/${uid}/${arena}`);
 
-  file.save(data, function(err) {
-    if (!err) {
-      file.get().then(function(data) {
-        res.json(data);
-      });
-    }
-  });
 
+  bufferStream.pipe(file.createWriteStream({
+      metadata: {
+        contentType: 'image/png',
+        metadata: {
+          custom: 'metadata'
+        }
+      },
+      public: true,
+      validation: "md5"
+    }))
+    .on('error', function(err) {})
+    .on('finish', function() {
+      res.json(data);
+    });
+  /*
+    file.save(data, function(err) {
+      if (!err) {
+        file.get().then(function(data) {
+          res.json(data);
+        });
+      }
+    });
+  */
 
 });
 
