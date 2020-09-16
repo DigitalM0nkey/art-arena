@@ -45,12 +45,12 @@ router.post("/", ({
   var data = contents.replace(/^data:image\/\w+;base64,/, "");
   const imageBuffer = Buffer.from(data, 'base64');
   const imageByteArray = new Uint8Array(imageBuffer);
+  const file = bucket.file(`new/${uid}/${arena}`);
   /*
     bufferStream.end(Buffer.from(data, 'base64'));
 
 
     const bucket = admin.storage().bucket('gs://artarena-fb540.appspot.com');
-    const file = bucket.file(`new/${uid}/${arena}`);
 
 
 
