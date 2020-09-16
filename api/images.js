@@ -43,37 +43,37 @@ router.post("/", ({
   // strip off the data: url prefix to get just the base64-encoded bytes
   console.log(contents.substring(0, 50));
   var data = contents.replace(/^data:image\/\w+;base64,/, "");
-
-  bufferStream.end(Buffer.from(data, 'base64'));
-
-
-  const bucket = admin.storage().bucket('gs://artarena-fb540.appspot.com');
-  const file = bucket.file(`new/${uid}/${arena}`);
-
-
-  bufferStream.pipe(file.createWriteStream({
-      metadata: {
-        contentType: 'data_url',
-        metadata: {
-          custom: 'metadata'
-        }
-      },
-      public: true,
-      validation: "md5"
-    }))
-    .on('error', function(err) {})
-    .on('finish', function() {
-      res.json(`new/${uid}/${arena}`);
-    });
+  const imageBuffer = Buffer.from(data, 'base64');
+  const imageByteArray = new Uint8Array(imageBuffer);
   /*
-    file.save(data, function(err) {
-      if (!err) {
-        file.get().then(function(data) {
-          res.json(data);
-        });
-      }
-    });
-  */
+    bufferStream.end(Buffer.from(data, 'base64'));
+
+
+    const bucket = admin.storage().bucket('gs://artarena-fb540.appspot.com');
+    const file = bucket.file(`new/${uid}/${arena}`);
+
+
+
+    bufferStream.pipe(file.createWriteStream({
+        metadata: {
+          contentType: 'image/png'
+        },
+        public: true,
+        validation: "md5"
+      }))
+      .on('error', function(err) {})
+      .on('finish', function() {
+        res.json(`new/${uid}/${arena}`);
+      });*/
+
+  file.save(imageByteArray, function(err) {
+    if (!err) {
+      file.get().then(function(data) {
+        res.json(data);
+      });
+    }
+  });
+
 
 });
 
