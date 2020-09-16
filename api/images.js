@@ -50,18 +50,36 @@ router.post("/", ({
   const bucket = admin.storage().bucket('gs://artarena-fb540.appspot.com');
   const file = bucket.file(`new/${uid}/${arena}`);
 
-  bufferStream.end(Buffer.from(contents, 'base64'));
-  bufferStream.pipe(file.createWriteStream({
-      metadata: {
-        contentType: 'image/png'
-      },
-      public: true,
-      validation: "md5"
-    }))
-    .on('error', function(err) {})
-    .on('finish', function() {
-      res.json(`new/${uid}/${arena}`);
-    });
+  bufferStream.end(Buffer.from(data, 'base64'));
+
+  let out = file.createWriteStream({
+    metadata: {
+      contentType: 'image/png'
+    },
+    public: true,
+    validation: "md5"
+  });
+  let canvasStream = canvas.pngStream();
+
+  canvasStream.on('data', function(chunk) {
+    out.write(chunk);
+  });
+
+  canvasStream.on('end', function() {
+    res.send('saved png');
+  });
+  /*
+    bufferStream.pipe(file.createWriteStream({
+        metadata: {
+          contentType: 'image/png'
+        },
+        public: true,
+        validation: "md5"
+      }))
+      .on('error', function(err) {})
+      .on('finish', function() {
+        res.json(`new/${uid}/${arena}`);
+      });*/
   /*
 
     file.save(imageByteArray, function(err) {
