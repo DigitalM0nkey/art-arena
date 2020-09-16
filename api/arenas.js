@@ -25,7 +25,9 @@ router.get("/:id", (req, res, next) => {
   });
 });
 
-router.post("/create", ({ body }, res, next) => {
+router.post("/create", ({
+  body
+}, res, next) => {
   console.log("---");
   console.log(body);
   console.log("---");
@@ -33,12 +35,10 @@ router.post("/create", ({ body }, res, next) => {
   pics.get(type).then(url => {
     db.collection("arenas")
       .add({
-        players: [
-          {
-            id: body.uid,
-            completion: new Date()
-          }
-        ],
+        players: [{
+          id: body.uid,
+          completion: new Date()
+        }],
         name: body.name,
         timeLimit: parseInt(body.timeLimit),
         type,
@@ -49,7 +49,7 @@ router.post("/create", ({ body }, res, next) => {
         startDate: Date.now()
       })
       .then(docRef => {
-        console.log("Document written with ID: ", docRef.id);
+        console.log("Document written with ID [Create]: ", docRef.id);
         res.json(docRef);
       })
       .catch(error => {
@@ -59,7 +59,9 @@ router.post("/create", ({ body }, res, next) => {
   });
 });
 
-router.post("/join", ({ body }, res, next) => {
+router.post("/join", ({
+  body
+}, res, next) => {
   console.log("---");
   console.log(body);
   console.log("---");
@@ -72,7 +74,7 @@ router.post("/join", ({ body }, res, next) => {
       })
     })
     .then(function(docRef) {
-      console.log("Document written with ID: ", docRef.id);
+      console.log("Document written with ID [Join]: ", docRef.id);
       res.json(docRef);
     })
     .catch(function(error) {
