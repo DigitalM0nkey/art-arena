@@ -83,5 +83,15 @@ router.post("/join", ({
     });
 });
 
+router.get("/:id/:user", ({
+  body
+}, res, next) => {
+  const arena = db.collection("arenas").doc(req.params.id);
+  arena.get().then((arena) => {
+    console.log(arena.data());
+
+    res.json(arena.data());
+  });
+});
 
 module.exports = router;

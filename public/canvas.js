@@ -474,7 +474,7 @@ const save = dir => {
         $(".myDrawingURL").text(downloadURL);
         $("#myDrawing").attr("src", downloadURL);
         $("#copy").attr("data-clipboard-text", downloadURL);
-        submitPicture().then()
+        submitImage(currentArena.id);
       });
     }
   );
