@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const admin = require("firebase-admin");
 const pics = require("../modules/pics");
 
 router.get("/types", (req, res, next) => {
