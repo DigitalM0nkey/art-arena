@@ -3,7 +3,8 @@ const getImageTypes = callback => $.get(`api/images/types`, callback);
 const getImage = (type, callback) => $.get(`api/images/${type}`, callback);
 
 
-const submitImage = () => {
+const submitImage = (currentArena) => {
+  console.log(currentArena);
   $.post(
     "api/images/", {
       uid: firebase.auth().currentUser.uid,
