@@ -34,7 +34,10 @@ router.post("/", ({
 
   const bufferStream = new stream.PassThrough();
   // strip off the data: url prefix to get just the base64-encoded bytes
-  var data = contents.slice(contents.indexOf(',') + 1).replace(/\s/g, '+').replace(/^data:image\/\w+;base64,/, "");
+
+  console.log(contents.substring(0, 100));
+  var data = contents.replace(/^data:image\/\w+;base64,/, "").replace(/\s/g, '+');
+  console.log(data.substring(0, 100));
   const imageBuffer = Buffer.from(data, 'base64');
 
   const bucket = admin.storage().bucket('gs://artarena-fb540.appspot.com');
