@@ -54,9 +54,9 @@ const createArena = () => {
     }
   );
 };
-
+/*
 const submitImage = arenaId => {
   $.get(`api/arenas/${arenaId}/${firebase.auth().currentUser.uid}`, function(data) {
     console.log("DATA", data);
   });
-};
+};*/
