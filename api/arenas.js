@@ -84,9 +84,10 @@ router.post("/join", ({
 });
 
 router.get("/:id/:user", ({
-  body
+  body,
+  params
 }, res, next) => {
-  const arena = db.collection("arenas").doc(req.params.id);
+  const arena = db.collection("arenas").doc(params.id);
   arena.get().then((arena) => {
     console.log(arena.data());
 
