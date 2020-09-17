@@ -20,6 +20,7 @@
   "homepage": "https://github.com/DigitalM0nkey/art-arena#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "canvas": "^2.6.1",
     "clipboard": "^2.0.4",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",

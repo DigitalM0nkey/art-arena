@@ -2,6 +2,7 @@ const router = require("express").Router();
 const admin = require("firebase-admin");
 const pics = require("../modules/pics");
 const stream = require('stream');
+const uuidv4 = require('uuid/v4');
 
 router.get("/types", (req, res, next) => {
   res.json(pics.types());
@@ -32,20 +33,35 @@ router.post("/", ({
   console.log(`Saving to ${uid}/${arena}`);
 
 
-  const bufferStream = new stream.PassThrough();
   // strip off the data: url prefix to get just the base64-encoded bytes
 
-  console.log(contents.substring(0, 100));
+
   var data = contents.replace(/^data:image\/\w+;base64,/, "").replace(/\s/g, '+');
-  console.log(data.substring(0, 100));
-  const imageBuffer = Buffer.from(data, 'base64');
+  //const imageBuffer = Buffer.from(data, 'base64');
 
   const bucket = admin.storage().bucket('gs://artarena-fb540.appspot.com');
-  const file = bucket.file(`new/${uid}/${arena}`);
+  const file = bucket.file(`new/${uid}/${arena}.png`);
+  const imageBuffer = new Buffer.from(data, 'base64');
+  const imageByteArray = new Uint8Array(imageBuffer);
+  const uuid = uuidv4();
 
-  bufferStream.end(Buffer.from(data, 'base64'));
 
+  file.save(imageByteArray, {
+    metadata: {
+      contentType: 'image/png',
+      metadata: {
+        firebaseStorageDownloadTokens: uuid,
+      }
+    }
+  }, end => {
+    file.get().then(function(data) {
+      res.json(data);
+    });
+  });
 
+  /*
+    const bufferStream = new stream.PassThrough();
+    bufferStream.end(imageBuffer);
   bufferStream.pipe(file.createWriteStream({
       metadata: {
         contentType: 'image/png'
@@ -53,11 +69,13 @@ router.post("/", ({
       public: true,
       validation: "md5"
     }))
-    .on('error', function(err) {})
+    .on('error', console.error)
     .on('finish', function() {
-      res.json(`new/${uid}/${arena}`);
+      file.get().then(function(data) {
+        res.json(data);
+      });
     });
-
+*/
   /*
       file.save(imageByteArray, function(err) {
         if (!err) {
